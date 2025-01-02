@@ -16,4 +16,4 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Author
 
-Copyright &copy; 2024 by [DEBUG#](http://www.github.com/debug-hash)
+Copyright &copy; 2025 by [DEBUG#](http://www.github.com/debug-hash)
