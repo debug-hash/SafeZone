@@ -12,7 +12,7 @@ const Product: FC<ProductProps> = ({ id, image, title, price, tags }) => {
 
 	return (
 		<Card
-			className={`transition-all ${isHovered ? 'shadow' : ''}`}
+			className={isHovered ? 'shadow' : ''}
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}>
 			<Link

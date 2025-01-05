@@ -11,11 +11,12 @@ const Search = () => {
 		const keyword = formData.get('keyword') as string;
 
 		const params = new URLSearchParams({ keyword });
-		navigate(`/?${params.toString()}`);
+		navigate(`/collections?${params.toString()}`);
 	};
 
 	return (
 		<Form
+			className='mt-lg-0 mt-2'
 			method='get'
 			onSubmit={handleSearch}>
 			<Form.Control

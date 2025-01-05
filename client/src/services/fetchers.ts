@@ -11,7 +11,11 @@ export const fetchCategories = async (): Promise<CategoryProps[]> => {
 export const fetchProducts = async (
 	keyword: string,
 	category: string,
+	minPrice?: number,
+	maxPrice?: number,
 ): Promise<ProductListProps> => {
-	const response = await _get(ENDPOINTS.products(keyword, category));
+	const response = await _get(ENDPOINTS.products(keyword, category, minPrice, maxPrice));
 	return response.data;
 };
+
+

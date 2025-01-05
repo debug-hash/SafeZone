@@ -8,8 +8,9 @@ from .extensions import db, api, login_manager, bcrypt, cors, jwt
 from .models import Category
 from .config import config_type
 from .resources import category_ns, product_ns, user_ns, token_ns
-from .admin import admin_manager
+from .admin import admin_manager, babel
 from .dao import load_users
+from .controllers import login_admin
 
 
 def create_app(config_name="dev"):
@@ -23,6 +24,9 @@ def create_app(config_name="dev"):
     bcrypt.init_app(app)
     jwt.init_app(app)
     cors.init_app(app)
+    babel.init_app(app)
+
+    app.add_url_rule("/auth-admin", view_func=login_admin, methods=["POST"])
 
     with app.app_context():
         db.create_all()

@@ -18,7 +18,7 @@ from .dao import (
 )
 from .dto import category_model, product_model, new_user_model, login_model, user_model
 from .parsers import product_parser, user_parser
-from .utils import hash_avatar_url
+from .utils import upload_image
 
 
 category_ns = Namespace("categories", description="Categories operations")
@@ -104,7 +104,6 @@ class TokenResource(Resource):
 @user_ns.route("/current-user/")
 class CurrentUserResource(Resource):
     method_decorators = [jwt_required(optional=True)]
-
     @user_ns.doc(security="jwt")
     @user_ns.marshal_with(user_model, code=200)
     def get(self):

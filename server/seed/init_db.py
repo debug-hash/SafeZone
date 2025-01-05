@@ -1,4 +1,4 @@
-from app.models import Category, Product, Tag
+from app.models import Category, Product, Tag, User
 from app import create_app, db
 
 
@@ -6,9 +6,17 @@ def seed_data():
     app = create_app()
 
     with app.app_context():
+        db.session.query(User).delete()
         db.session.query(Category).delete()
         db.session.query(Product).delete()
         db.session.query(Tag).delete()
+
+        admin = User(
+            username="ADMIN", email="admin@gmail.com", password="admin", is_admin=True
+        )
+        db.session.add(admin)
+        db.session.commit()
+        print("Admin have been added to the database.")
 
         categories = [
             Category(title="Mobile"),

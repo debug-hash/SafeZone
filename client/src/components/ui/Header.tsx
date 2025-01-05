@@ -4,16 +4,20 @@ import { HiOutlineShoppingCart } from 'react-icons/hi2';
 
 import useCategories from '@/hooks/useCategories';
 import Search from './Search';
+import UserMenu from './UserMenu';
+import { useThemeStore } from '@/hooks/useThemeStore';
 
 const Header = () => {
 	const { data } = useCategories();
+	const { isDarkMode } = useThemeStore();
 
 	return (
-		<header className='sticky-top'>
+		<header className={`sticky-top ${isDarkMode && 'border-bottom'}`}>
 			<Navbar
 				collapseOnSelect
 				expand='lg'
-				className='bg-light'>
+				bg={isDarkMode ? 'primary' : 'light'}
+				data-bs-theme={isDarkMode ? 'dark' : 'light'}>
 				<Container>
 					<Link
 						className='navbar-brand fw-bold font-monospace'
@@ -32,7 +36,7 @@ const Header = () => {
 									title='Categories'
 									id='collapsible-nav-categories'>
 									{data?.map((item) => (
-										<NavLink
+										<Link
 											className='dropdown-item'
 											key={
 												item.id
@@ -42,7 +46,7 @@ const Header = () => {
 											}
 											to={`/collections/?category=${item.id}`}>
 											{item.title}
-										</NavLink>
+										</Link>
 									))}
 								</NavDropdown>
 								<li className='nav-item'>
@@ -81,20 +85,7 @@ const Header = () => {
 								</Nav.Link>
 							</Nav>
 						</div>
-						<Nav>
-							<NavLink
-								to={'/sign-in'}
-								className={'nav-link'}
-								title='Sign In'>
-								Sign In
-							</NavLink>
-							<NavLink
-								to={'/sign-up'}
-								className={'nav-link'}
-								title='Sign Up'>
-								Sign Up
-							</NavLink>
-						</Nav>
+						<UserMenu />
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

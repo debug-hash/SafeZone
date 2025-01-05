@@ -1,12 +1,17 @@
 import axios from 'axios';
 
+import { getToken } from './auth';
+
 const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://127.0.0.1:5000';
 
-const axiosClient = axios.create({
+const token = getToken();
+
+export const axiosClient = axios.create({
 	baseURL: BASE_URL,
 	headers: {
 		'Content-Type': 'application/json',
 		Accept: 'application/json',
+		Authorization: `Bearer ${token}`,
 	},
 	timeout: 2000,
 });

@@ -1,16 +1,21 @@
 import cloudinary
-from secrets import token_hex
+from secrets import token_hex, token_urlsafe
 from os import path, getenv
 from dotenv import load_dotenv
+from datetime import timedelta
 
 load_dotenv()
 
 base_dir = path.abspath(path.dirname(__file__))
+file_path = path.join(path.dirname(__file__), "static")
+cdn_ckeditor = ["//cdn.ckeditor.com/4.6.0/full-all/ckeditor.js"]
 
 
 class Config:
     SECRET_KEY = token_hex()
+    JWT_SECRET_KEY = token_urlsafe(24)
     FLASK_ADMIN_SWATCH = "lux"
+    REMEMBER_COOKIE_DURATION = timedelta(days=7)
 
     cloudinary.config(
         cloud_name=getenv("CLOUD_NAME"),

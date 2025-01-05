@@ -7,6 +7,7 @@ import 'bootswatch/dist/lux/bootstrap.min.css';
 
 import App from '@/App';
 import { queryClient } from '@/services/queryClient';
+import ThemeProvider from '@/providers/ThemeProvider';
 
 const root = document.getElementById('root');
 
@@ -15,7 +16,9 @@ createRoot(root!).render(
 		<QueryClientProvider client={queryClient}>
 			<ReactQueryDevtools initialIsOpen={false} />
 			<BrowserRouter>
-				<App />
+				<ThemeProvider>
+					<App />
+				</ThemeProvider>
 			</BrowserRouter>
 		</QueryClientProvider>
 	</StrictMode>,

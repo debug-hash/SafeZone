@@ -3,6 +3,7 @@ import Details from '@/pages/Details';
 import Home from '@/pages/Home';
 import Pricing from '@/pages/Pricing';
 import Collections from '@/pages/Collections';
+import SignIn from '@/pages/SignIn';
 
 const publicRoutes: RoutesTypes[] = [
 	{
@@ -27,4 +28,11 @@ const publicRoutes: RoutesTypes[] = [
 	// },
 ];
 
-export { publicRoutes };
+const authRoutes: RoutesTypes[] = [
+	{
+		path: '/sign-in',
+		component: SignIn,
+	},
+];
+
+export { publicRoutes, authRoutes };
