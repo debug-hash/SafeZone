@@ -2,8 +2,8 @@ import { Link } from 'react-router';
 
 const Hero = () => {
 	return (
-		<section className='px-4 py-5 my-5 text-center'>
-			<h1 className='display-5 fw-bold text-body-emphasis text-uppercase'>
+		<section className='p-5 mb-5 text-center border border-top-0 rounded-bottom-5'>
+			<h1 className='display-5 fw-bold text-body-emphasis text-uppercase prata-regular'>
 				The Wait Is Finally Over!
 			</h1>
 			<div className='col-lg-6 mx-auto'>
@@ -20,7 +20,7 @@ const Hero = () => {
 					</Link>
 					<Link
 						to={''}
-						className='btn btn-primary px-4'>
+						className='btn btn-outline-primary px-4'>
 						Discover eSale
 					</Link>
 				</div>

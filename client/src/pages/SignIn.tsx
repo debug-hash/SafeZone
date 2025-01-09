@@ -2,26 +2,13 @@ import { Alert, Button, Card, Form } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import { useState } from 'react';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { SignInFormValues } from '@/types/form.type';
+import { SignInType } from '@/types/form.type';
 import Input from '@/components/ui/Input';
 import useLogIn from '@/hooks/useLogIn';
 import ActivityIndicator from '@/components/ui/ActivityIndicator';
-
-const schema = yup
-	.object({
-		Email: yup
-			.string()
-			.email('Please enter a valid email address')
-			.required('Email is required'),
-		Password: yup
-			.string()
-			.required('Password is required')
-			.min(4, 'Password must be at least 8 characters'),
-	})
-	.required();
+import { signInSchema } from '@/schemas/schemas';
 
 const SignIn = () => {
 	const { login, isPending, error } = useLogIn();
@@ -30,13 +17,14 @@ const SignIn = () => {
 		register,
 		formState: { errors },
 		handleSubmit,
-	} = useForm<SignInFormValues>({
-		resolver: yupResolver(schema),
+	} = useForm<SignInType>({
+		resolver: yupResolver(signInSchema),
 		mode: 'onChange',
 	});
 	const [validated, setValidated] = useState(false);
 
-	const onSubmit: SubmitHandler<SignInFormValues> = (data) => {
+	const onSubmit: SubmitHandler<SignInType> = (data) => {
+		console.log(data);
 		login(data);
 		setValidated(true);
 	};
@@ -65,7 +53,7 @@ const SignIn = () => {
 						label='Email'
 						register={register}
 						placeholder='Enter your email'
-						type='email'
+						type='Email'
 						error={errors.Email}
 						required
 					/>

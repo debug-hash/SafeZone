@@ -3,6 +3,8 @@ from flask_login import login_user
 
 from .dao import auth_user
 
+import stripe
+
 
 def login_admin():
     email = request.form.get("email")
@@ -18,3 +20,20 @@ def login_admin():
         flash("Invalid email or password. Please try again.", "warning")
 
     return redirect(url_for("admin.index"))
+
+
+def create_payment():
+    try:
+        data = request.get_json()
+        amount = data["amount"]
+
+        # Tạo PaymentIntent
+        payment_intent = stripe.PaymentIntent.create(
+            amount=amount,
+            currency="usd",
+            metadata={"integration_check": "accept_a_payment"},
+        )
+
+        return jsonify({"client_secret": payment_intent.client_secret})
+    except Exception as e:
+        return jsonify(error=str(e)), 403

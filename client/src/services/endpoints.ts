@@ -9,6 +9,7 @@ export const ENDPOINTS = {
 
 		return url.endsWith('&') ? url.slice(0, -1) : url;
 	},
+	details: (id: string | undefined) => `${import.meta.env.VITE_API_PRODUCTS_URL}${id}/`,
 	token: import.meta.env.VITE_API_TOKEN_URL,
 	current_user: import.meta.env.VITE_API_CURRENT_USER_URL,
 };

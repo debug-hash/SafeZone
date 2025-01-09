@@ -5,9 +5,11 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import 'bootswatch/dist/lux/bootstrap.min.css';
 
+import '@/styles/globals.css';
 import App from '@/App';
 import { queryClient } from '@/services/queryClient';
 import ThemeProvider from '@/providers/ThemeProvider';
+import ShopContextProvider from './contexts/ShopContext';
 
 const root = document.getElementById('root');
 
@@ -17,7 +19,9 @@ createRoot(root!).render(
 			<ReactQueryDevtools initialIsOpen={false} />
 			<BrowserRouter>
 				<ThemeProvider>
-					<App />
+					<ShopContextProvider>
+						<App />
+					</ShopContextProvider>
 				</ThemeProvider>
 			</BrowserRouter>
 		</QueryClientProvider>

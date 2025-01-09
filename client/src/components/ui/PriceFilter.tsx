@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { CiFilter } from 'react-icons/ci';
 
 const PriceFilter = () => {
@@ -31,49 +31,37 @@ const PriceFilter = () => {
 			className='mb-5 mt-3'
 			onSubmit={handleFilter}
 			method='GET'>
-			<Row className='align-items-center'>
-				<Col md={3}>
-					<Form.Group
-						controlId='minPrice'
-						className='d-flex'>
-						<Form.Label className='fw-bold'>
-							Min Price
-						</Form.Label>
-						<Form.Control
-							type='number'
-							name='min_price'
-							value={minPrice}
-							onChange={handleMinPriceChange}
-							placeholder='Min Price'
-						/>
-					</Form.Group>
-				</Col>
+			<Form.Group
+				controlId='minPrice'
+				className='mb-3'>
+				<Form.Label className='fw-bold'>Min Price</Form.Label>
+				<Form.Control
+					type='number'
+					name='min_price'
+					value={minPrice}
+					onChange={handleMinPriceChange}
+					placeholder='Min Price'
+				/>
+			</Form.Group>
 
-				<Col md={3}>
-					<Form.Group
-						controlId='maxPrice'
-						className='d-flex'>
-						<Form.Label className='fw-bold'>
-							Max Price
-						</Form.Label>
-						<Form.Control
-							type='number'
-							name='max_price'
-							value={maxPrice}
-							onChange={handleMaxPriceChange}
-							placeholder='Max Price'
-						/>
-					</Form.Group>
-				</Col>
+			<Form.Group
+				controlId='maxPrice'
+				className='mb-3'>
+				<Form.Label className='fw-bold'>Max Price</Form.Label>
+				<Form.Control
+					type='number'
+					name='max_price'
+					value={maxPrice}
+					onChange={handleMaxPriceChange}
+					placeholder='Max Price'
+				/>
+			</Form.Group>
 
-				<Col md={2}>
-					<Button
-						variant='primary'
-						type='submit'>
-						<CiFilter size={20} />
-					</Button>
-				</Col>
-			</Row>
+			<Button
+				variant='primary'
+				type='submit'>
+				<CiFilter size={20} />
+			</Button>
 		</Form>
 	);
 };

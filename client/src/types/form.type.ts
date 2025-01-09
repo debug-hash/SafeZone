@@ -1,16 +1,11 @@
+import { User } from './user.type';
+
 type Password = {
 	Password: string;
 };
 
-export type SignUpFormValues = SignInFormValues & {
-	'First Name': string;
-	'Last Name': string;
-	Phone: number;
-	'Confirm Password': string;
-	Avatar: string;
-	Username: string;
-};
-
-export type SignInFormValues = Password & {
+export type SignInType = Password & {
 	Email: string;
 };
+
+export type SignUpType = User & Password;

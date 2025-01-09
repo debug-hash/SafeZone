@@ -1,22 +1,24 @@
-import os
+import stripe
 
 from flask import Flask
 from flask_migrate import Migrate
 
 from .config import Config
-from .extensions import db, api, login_manager, bcrypt, cors, jwt
+from .extensions import db, api, login_manager, bcrypt, cors, jwt, toolbar
 from .models import Category
-from .config import config_type
+from .config import config_type, stripe_keys
 from .resources import category_ns, product_ns, user_ns, token_ns
 from .admin import admin_manager, babel
 from .dao import load_users
-from .controllers import login_admin
+from .controllers import login_admin, create_payment
 
 
 def create_app(config_name="dev"):
     app = Flask(__name__)
 
     app.config.from_object(config_type[config_name])
+
+    stripe.api_key = stripe_keys["secret_key"]
 
     db.init_app(app)
     migrate = Migrate(app, db)
@@ -25,8 +27,10 @@ def create_app(config_name="dev"):
     jwt.init_app(app)
     cors.init_app(app)
     babel.init_app(app)
+    toolbar.init_app(app)
 
     app.add_url_rule("/auth-admin", view_func=login_admin, methods=["POST"])
+    app.add_url_rule("/create-payment-intent", view_func=create_payment, methods=["POST"])
 
     with app.app_context():
         db.create_all()

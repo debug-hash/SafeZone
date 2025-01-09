@@ -1,7 +1,7 @@
 import { CategoryProps } from '@/types/category.type';
 import { _get } from './axios';
 import { ENDPOINTS } from './endpoints';
-import { ProductListProps } from '@/types/product.type';
+import { ProductDetailProps, ProductListProps } from '@/types/product.type';
 
 export const fetchCategories = async (): Promise<CategoryProps[]> => {
 	const response = await _get(ENDPOINTS.categories);
@@ -18,4 +18,7 @@ export const fetchProducts = async (
 	return response.data;
 };
 
-
+export const fetchProduct = async (id: string | undefined): Promise<ProductDetailProps> => {
+	const response = await _get(ENDPOINTS.details(id));
+	return response.data;
+};

@@ -4,6 +4,9 @@ import Home from '@/pages/Home';
 import Pricing from '@/pages/Pricing';
 import Collections from '@/pages/Collections';
 import SignIn from '@/pages/SignIn';
+import Cart from '@/pages/Cart';
+import Profile from '@/pages/Profile';
+import Payment from '@/pages/Payment';
 
 const publicRoutes: RoutesTypes[] = [
 	{
@@ -22,6 +25,14 @@ const publicRoutes: RoutesTypes[] = [
 		path: '/pricing',
 		component: Pricing,
 	},
+	{
+		path: '/cart',
+		component: Cart,
+	},
+	{
+		path: '/checkout',
+		component: Payment,
+	},
 	// {
 	// 	path: '/*',
 	// 	component: NotFound,
@@ -35,4 +46,11 @@ const authRoutes: RoutesTypes[] = [
 	},
 ];
 
-export { publicRoutes, authRoutes };
+const privateRoutes: RoutesTypes[] = [
+	{
+		path: '/profile',
+		component: Profile,
+	},
+];
+
+export { publicRoutes, authRoutes, privateRoutes };

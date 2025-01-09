@@ -1,15 +1,33 @@
-import { Badge, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router';
-import { HiOutlineShoppingCart } from 'react-icons/hi2';
 
 import useCategories from '@/hooks/useCategories';
-import Search from './Search';
+// import Search from './Search';
 import UserMenu from './UserMenu';
 import { useThemeStore } from '@/hooks/useThemeStore';
 
 const Header = () => {
 	const { data } = useCategories();
 	const { isDarkMode } = useThemeStore();
+
+	const menu = [
+		{
+			title: 'Collections',
+			path: '/collections',
+		},
+		{
+			title: 'About',
+			path: '/about',
+		},
+		{
+			title: 'Contact',
+			path: '/contact',
+		},
+		{
+			title: 'Pricing',
+			path: '/pricing',
+		},
+	];
 
 	return (
 		<header className={`sticky-top ${isDarkMode && 'border-bottom'}`}>
@@ -20,17 +38,15 @@ const Header = () => {
 				data-bs-theme={isDarkMode ? 'dark' : 'light'}>
 				<Container>
 					<Link
-						className='navbar-brand fw-bold font-monospace'
+						className='logo navbar-brand w-36 fw-bold'
 						title={
 							'eSale 🛒 - Mobile phone, dtdd, smartphone, tablet, tablet, laptop, notebook, accessories, smartwatch, watch, public news turmeric'
 						}
 						to={'/'}>
-						eSale 🛒
+						eSale &copy;
 					</Link>
-					<Navbar.Toggle aria-controls='responsive-navbar-nav' />
-					<Navbar.Collapse id='responsive-navbar-nav'>
+					<Navbar.Collapse aria-controls='responsive-navbar-nav'>
 						<div className='mx-auto'>
-							<Search />
 							<Nav className='align-items-lg-center'>
 								<NavDropdown
 									title='Categories'
@@ -49,44 +65,29 @@ const Header = () => {
 										</Link>
 									))}
 								</NavDropdown>
-								<li className='nav-item'>
-									<NavLink
-										className={
-											'nav-link'
-										}
-										to={'/collections'}
-										title={
-											'Collections'
-										}>
-										Collections
-									</NavLink>
-								</li>
-								<li className='nav-item'>
-									<NavLink
-										className={
-											'nav-link'
-										}
-										title={'Pricing'}
-										to={'/pricing'}>
-										Pricing
-									</NavLink>
-								</li>
-								<Nav.Link
-									className='nav-link'
-									title={'Cart'}>
-									<HiOutlineShoppingCart
-										size={20}
-									/>{' '}
-									<Badge
-										bg='primary'
-										className='rounded-circle'>
-										0
-									</Badge>
-								</Nav.Link>
+								{menu.map((item, idx) => (
+									<li
+										className='nav-item'
+										key={idx}>
+										<NavLink
+											className={
+												'nav-link'
+											}
+											to={
+												item.path
+											}
+											title={
+												item.title
+											}>
+											{item.title}
+										</NavLink>
+									</li>
+								))}
 							</Nav>
 						</div>
-						<UserMenu />
 					</Navbar.Collapse>
+					{/* <Search /> */}
+					<UserMenu />
 				</Container>
 			</Navbar>
 		</header>

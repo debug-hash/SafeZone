@@ -66,6 +66,7 @@ class ProductView(CommonView):
     column_editable_list = [
         "title",
         "price",
+        "image",
         "category",
     ] + CommonView.column_editable_list
     column_sortable_list = ["title"] + CommonView.column_sortable_list

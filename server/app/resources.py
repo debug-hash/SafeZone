@@ -96,14 +96,23 @@ class TokenResource(Resource):
         )
         if not user:
             return jsonify(message="Invalid email or password"), 401
+
         access_token = create_access_token(identity=user, fresh=True)
         refresh_token = create_refresh_token(identity=user)
-        return jsonify(access_token=access_token, refresh_token=refresh_token)
+
+        return jsonify(
+            access_token=access_token,
+            refresh_token=refresh_token,
+            httponly=True,
+            secure=True,
+            samesite="Strict",
+        )
 
 
 @user_ns.route("/current-user/")
 class CurrentUserResource(Resource):
     method_decorators = [jwt_required(optional=True)]
+
     @user_ns.doc(security="jwt")
     @user_ns.marshal_with(user_model, code=200)
     def get(self):

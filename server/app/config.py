@@ -10,6 +10,11 @@ base_dir = path.abspath(path.dirname(__file__))
 file_path = path.join(path.dirname(__file__), "static")
 cdn_ckeditor = ["//cdn.ckeditor.com/4.6.0/full-all/ckeditor.js"]
 
+stripe_keys = {
+    "secret_key": getenv("STRIPE_SECRET_KEY"),
+    "publishable_key": getenv("STRIPE_PUBLISHABLE_KEY"),
+}
+
 
 class Config:
     SECRET_KEY = token_hex()
@@ -28,6 +33,9 @@ class DevConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + path.join(base_dir, "database", "esale.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    SQLALCHEMY_RECORD_QUERIES = True
+    SQLALCHEMY_ECHO = True
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 
 class ProdConfig(Config):

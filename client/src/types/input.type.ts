@@ -1,10 +1,8 @@
 import { FieldError, Path, UseFormRegister } from 'react-hook-form';
 
-import { SignInFormValues } from './form.type';
-
 export type InputProps = {
-	label: Path<SignInFormValues>;
-	register: UseFormRegister<SignInFormValues>;
+	label: Path<any>;
+	register: UseFormRegister<any>;
 	required: boolean;
 	placeholder: string;
 	type: string;

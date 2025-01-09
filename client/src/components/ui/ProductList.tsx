@@ -9,9 +9,8 @@ const ProductList: FC<ProductListProps> = ({ results }) => {
 		<Row className='g-4'>
 			{results.map((product, idx) => (
 				<Col
-					lg={3}
+					lg={4}
 					md={6}
-					sm={12}
 					key={idx}>
 					<Product
 						key={product.id}

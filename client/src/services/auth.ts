@@ -6,12 +6,18 @@ import { User } from '@/types/user.type';
 const cookies = new Cookies();
 
 export const login = async (email: string, password: string) => {
-	const response = await axiosClient.post(ENDPOINTS.token, {
-		email,
-		password,
-	});
+	const response = await axiosClient.post(
+		ENDPOINTS.token,
+		{
+			email,
+			password,
+		},
+		{
+			withCredentials: true,
+		},
+	);
 
-	console.log(response.data.access_token);
+	console.log(response);
 
 	const user = await axiosClient.get(ENDPOINTS.current_user, {
 		headers: {

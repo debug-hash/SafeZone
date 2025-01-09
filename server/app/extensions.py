@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
+from flask_debugtoolbar import DebugToolbarExtension
 
 authorizations = {
     "jwt": {
@@ -34,4 +35,5 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 bcrypt = Bcrypt()
 jwt = JWTManager()
-cors = CORS(resources={r"/*": {"origins": "*"}})
+cors = CORS(resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+toolbar = DebugToolbarExtension()
